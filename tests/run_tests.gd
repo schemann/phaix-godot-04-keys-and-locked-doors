@@ -5,8 +5,7 @@ extends SceneTree
 ## `-- --only=text` runs the tests whose name contains the text (for example `-- --only=timer`).
 ##
 ## Saves: every level the tests load gets its own temporary save file (OS temp dir, wiped
-## first), so a test run never reads or writes the real best_times.json (gamekb
-## save-persistence, agent rule 11). A few tests damage a file or write to a missing folder on
+## first), so a test run never reads or writes the real best_times.json. A few tests damage a file or write to a missing folder on
 ## purpose: the game logs a WARNING line for each of those, that is expected.
 
 const BaseChain := preload("res://steps/step_00_start/room_chain.gd") ## Tutorial 03's chain, no locks: steps 0 to 2.
@@ -223,7 +222,7 @@ func test_code_rules() -> Array[String]:
 			_expect(failures, not line.contains("Input.is_key_pressed") and not line.contains("Input.is_physical_key_pressed"), "%s: reads a key directly" % where)
 			_expect(failures, not line.contains("Input.is_mouse_button_pressed") and not line.contains("get_joy_axis") and not line.contains("is_joy_button_pressed"), "%s: reads a device directly" % where)
 			_expect(failures, not line.contains("event is InputEventKey") and not line.contains("event is InputEventJoypad"), "%s: reads a key or button event directly" % where)
-	# Gameplay state is never written in _process (gamekb godot standard, section 1).
+	# Gameplay state is never written in _process.
 	for step in STEPS:
 		var level_source := FileAccess.get_file_as_string("res://steps/%s/level.gd" % step)
 		_expect(failures, not level_source.contains("func _process("), "%s/level.gd has a _process: the clock belongs in _physics_process" % step)
@@ -1893,7 +1892,7 @@ func test_full_run() -> Array[String]:
 
 #endregion
 
-#region Graybox standard: closed rooms, materials, lighting (gamekb: grayboxing-and-metrics)
+#region Graybox standard: closed rooms, materials, lighting
 
 func test_materials() -> Array[String]:
 	var failures: Array[String] = []
