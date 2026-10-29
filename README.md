@@ -14,7 +14,7 @@ that step. The project's main scene is the final step.
 
 | Folder | Part of the video |
 |---|---|
-| `steps/step_00_start` | Starting point (the final state of the previous tutorial) |
+| `steps/step_00_start` | Starting point (the final state of tutorial 03) |
 | `steps/step_01_key_pickup` | Step 1 - A key to pick up |
 | `steps/step_02_locked_door` | Step 2 - A locked door |
 | `steps/step_03_key_spots` | Step 3 - Spots for keys |
