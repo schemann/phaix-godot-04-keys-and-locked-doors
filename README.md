@@ -2,7 +2,10 @@
 
 Project files for tutorial 04 of the Godot 4 series by Phaix on YouTube (https://www.youtube.com/@Phaix).
 
-Lock doors in a generated level in Godot 4 and make sure every run can still be finished: a key pickup, a locked door that asks the level, key spots on markers with a second seeded generator, a headless check over a thousand seeds, and feedback when a door stays shut. Every step is its own project folder.
+Add keys and locked doors in Godot 4, like Roblox DOORS.
+A DOORS-style game where every random level stays solvable.
+
+A key pickup, a locked door that asks the level, key spots on markers with a second seeded generator, a headless check over a thousand seeds, and feedback when a door stays shut. Every step is its own project folder.
 
 ![Screenshot](screenshot.png)
 
@@ -32,6 +35,15 @@ in the video and in the HUD.
 ```sh
 godot --headless --path . -s res://tests/run_tests.gd
 ```
+
+## Changed since the video
+
+- One fix went into every step folder after the video: the old rooms are now freed when the door behind the player has shut, not when the player enters the next room. Before, you could look back through that door while it was still closing and see a hole where the oldest room had been.
+- `door.gd` has a new signal, `closed`, emitted when the door has finished swinging shut (never when it is opened again on the way).
+- `level.gd` has a new function, `_on_door_closed(index)`, which frees the rooms behind that door and puts a wall where the doorway of the room just left was. `_spawn_room` connects the signal, and `_on_room_entered` only closes the door behind the player now.
+- `tests/run_tests.gd` has a new test, `test_rooms_wait_for_the_door`, and the streaming test expects the rooms to go when the door has shut.
+- The code on screen in the video shows the earlier version of these lines.
+- The rest is as in the video.
 
 ## License
 

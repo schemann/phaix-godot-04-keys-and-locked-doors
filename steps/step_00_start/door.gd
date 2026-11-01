@@ -2,6 +2,7 @@ extends Node3D
 ## A hinged door. It swings away from the player who walks up to it.
 
 signal opened ## Emitted as the door starts to swing open.
+signal closed ## Emitted when the door has swung shut. Opened again on the way, it never comes.
 
 const OPEN_ANGLE := -PI / 2.0 ## Away from the player, into the next room.
 const SWING_TIME := 0.5 ## Seconds.
@@ -32,6 +33,7 @@ func _physics_process(_delta: float) -> void:
 		_close_pending = false
 		is_open = false
 		_swing_to(0.0)
+		_tween.tween_callback(closed.emit)
 
 func open() -> void:
 	_close_pending = false
