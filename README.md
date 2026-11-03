@@ -45,6 +45,10 @@ godot --headless --path . -s res://tests/run_tests.gd
 - The code on screen in the video shows the earlier version of these lines.
 - The rest is as in the video.
 
+## Support
+
+Support the channel: https://ko-fi.com/phaix or https://github.com/sponsors/schemann
+
 ## License
 
 Code and scenes: MIT (see LICENSE).
